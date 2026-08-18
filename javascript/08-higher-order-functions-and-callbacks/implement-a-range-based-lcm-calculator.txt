@@ -1,0 +1,45 @@
+** start of script.js **
+
+function smallestCommons(arr) {
+  /*
+  [2, 10]
+  2 3 4 5 6 7 8 9 10
+  2*3*2*5*  7*2*3
+  remain = multi % i
+  remain == 0?
+  y: i++
+  n: i % remain == 0 ?
+    y: multi *= i / remain
+    n: for k = 2 -> k <= i, k++
+        if remain * k % i === 0
+          multi *= k
+          break
+  */
+
+  const newArr = arr.slice();
+  newArr.sort((a, b) => a - b);
+  
+  let multi = newArr[0];
+  for (let i = newArr[0] + 1; i <= newArr[1]; i++) {
+    let remain = multi % i;
+    if (remain === 0) {
+      continue;
+    } else if (i % remain === 0) {
+      multi *= i / remain;
+    } else {
+      for (let k = 2; k <= i; k++) {
+        if (remain * k % i === 0) {
+          multi *= k;
+          break;
+        }
+      }
+    }
+  }
+  return multi;
+}
+
+console.log(smallestCommons([23, 18]));
+
+
+** end of script.js **
+

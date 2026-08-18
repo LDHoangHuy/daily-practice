@@ -1,0 +1,73 @@
+body {
+  margin: 0;
+  font-family: sans-serif;
+  transition: background 0.3s, color 0.3s;
+  height: 100vh;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  border: 1px solid black;
+  width: fit-content;
+  background-color: white;
+}
+
+li {
+  list-style-type: none;
+  padding: 15px;
+  padding-left: 50px;
+  font-size: 1.5rem;
+  width: 200px;
+  transition: transform 0.2s;
+}
+
+li:hover {
+  background-color: #eee;
+  cursor: pointer;
+  transform: scale(0.95);
+}
+
+#status {
+  text-align: center;
+  min-height: 20px;
+}
+
+.theme-light {
+  background: white;
+}
+
+.theme-ocean {
+  background: #020024;
+  background: linear-gradient(346deg,rgba(2, 0, 36, 1) 0%, rgba(9, 9, 121, 1) 0%, rgba(0, 212, 255, 1) 100%);
+}
+
+.theme-sunset {
+  background: #251aa1;
+  background: linear-gradient(312deg, rgba(37, 26, 161, 1) 0%, rgba(253, 29, 29, 1) 50%, rgba(252, 176, 69, 1) 100%);
+}
+
+.theme-cloudy {
+  background: #fffded;
+  background: radial-gradient(circle, rgba(255, 253, 237, 1) 0%, rgba(148, 187, 233, 1) 100%);
+}
+
+#theme-switcher-button {
+  background-color: black;
+  color: white;
+  outline: none;
+  border: none;
+  padding: 15px;
+  font-size: 1.5rem;
+}
+
+[aria-live="polite"] {
+  position: fixed;
+  font-size: 1.5rem;
+  font-weight: bold;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0;
+  z-index: -1;
+}

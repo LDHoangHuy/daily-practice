@@ -1,0 +1,51 @@
+const regexPattern = document.querySelector("#pattern");
+const stringToTest = document.querySelector("#test-string");
+const testButton = document.querySelector("#test-btn");
+const testResult = document.querySelector("#result");
+
+const caseInsensitiveFlag = document.querySelector("#i");
+const globalFlag = document.querySelector("#g");
+
+function getFlags() {
+  let result = "";
+  if (caseInsensitiveFlag.checked) {
+    result += 'i';
+  }
+  if (globalFlag.checked) {
+    result += 'g';
+  }
+  return result;
+}
+
+testButton.addEventListener("click", () => {
+  const flags = getFlags();
+  const regex = new RegExp(regexPattern.value, flags);
+  const str = stringToTest.textContent;
+  const arr = str.split('');
+  let captured;
+  const result = [];
+  if (flags.includes('g')) {
+    captured = Array.from(str.matchAll(regex));
+    let shifted = 0;
+    captured.forEach((patternMatch) => {
+      arr.splice(patternMatch['index'] + shifted, 0, '<span class="highlight">');
+      shifted++;
+      arr.splice(patternMatch['index'] + patternMatch[0].length + shifted, 0, "</span>");
+      shifted++;
+
+      result.push(patternMatch[0]);
+    })
+  } else {
+    captured = str.match(regex);
+    if (captured) {
+      arr.splice(captured['index'], 0, '<span class="highlight">');
+      arr.splice(captured['index'] + captured[0].length + 1, 0, "</span>");
+
+      result.push(captured[0]);
+    }
+  }
+  stringToTest.innerHTML = arr.join('');
+  testResult.textContent = result.length === 0 
+  ? "no match"
+  : result.join(', ');
+})

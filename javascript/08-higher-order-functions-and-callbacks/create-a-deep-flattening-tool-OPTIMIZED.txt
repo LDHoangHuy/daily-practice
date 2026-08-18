@@ -1,0 +1,15 @@
+** start of script.js **
+
+function steamrollArray(arr) {
+  const result = [];
+  for (const item of arr) {
+    Array.isArray(item)
+      ? result.push(...steamrollArray(item))
+      : result.push(item);
+  }
+  return result;
+}
+
+
+** end of script.js **
+

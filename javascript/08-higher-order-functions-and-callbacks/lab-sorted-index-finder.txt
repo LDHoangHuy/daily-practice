@@ -1,0 +1,13 @@
+** start of script.js **
+
+function getIndexToIns(arr, num) {
+  arr.sort((a, b) => a - b);
+  const result = arr.findIndex(n => num <= n);
+  return result !== -1 ? result : arr.length;
+}
+
+console.log(getIndexToIns([], 5));
+
+
+** end of script.js **
+

@@ -1,0 +1,13 @@
+** start of script.js **
+
+function frankenSplice(arr1, arr2, index) {
+  const result = [...arr2];
+  result.splice(index, 0, ...arr1);
+  return result;
+}
+
+console.log(frankenSplice([1, 2], ["a", "b"], 1));
+
+
+** end of script.js **
+

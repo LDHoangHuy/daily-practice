@@ -1,0 +1,24 @@
+** start of script.js **
+
+function mutation(arr) {
+  /*
+  arr[0].includes(a char from arr[1])
+  if only one char from arr[1] not in arr[0]
+  -> return false else return true
+   */
+  const arr0 = arr[0].toLowerCase();
+  const arr1 = arr[1].toLowerCase();
+  for (const char of arr1) {
+    if (!arr0.includes(char)) {
+      return false;
+    }
+  }
+  return true;
+}
+
+console.log(mutation(["Alien", "line"]));
+console.log(mutation(["hello", "hey"]));
+
+
+** end of script.js **
+

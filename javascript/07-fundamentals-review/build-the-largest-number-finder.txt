@@ -1,0 +1,31 @@
+** start of script.js **
+
+function findMax(arr1D) {
+  let max = arr1D[0];
+  for (let i = 1; i < arr1D.length; i++) {
+    if (arr1D[i] > max) {
+      max = arr1D[i];
+    }
+  }
+  return max;
+}
+
+function largestOfAll(arr2D) {
+  const res = [];
+  for (const arr of arr2D) {
+    const maxOfArr = findMax(arr);
+    if (maxOfArr !== undefined) {
+      res.push(maxOfArr);
+    }
+  }
+  return res;
+}
+
+const myArr = [[1, 2, 3], [3, 4, 5], [-1, -2, -3], [0, -1], []];
+
+console.log(largestOfAll(myArr));
+//[3, 5, -1, 0]
+
+
+** end of script.js **
+

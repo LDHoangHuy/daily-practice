@@ -1,0 +1,37 @@
+const regexPattern = document.querySelector("#pattern");
+const stringToTest = document.querySelector("#test-string");
+const testButton = document.querySelector("#test-btn");
+const testResult = document.querySelector("#result");
+
+const caseInsensitiveFlag = document.querySelector("#i");
+const globalFlag = document.querySelector("#g");
+
+function getFlags() {
+  let result = "";
+  if (caseInsensitiveFlag.checked) {
+    result += 'i';
+  }
+  if (globalFlag.checked) {
+    result += 'g';
+  }
+  return result;
+}
+
+testButton.addEventListener("click", () => {
+  const flags = getFlags();
+  const regex = new RegExp(regexPattern.value, flags);
+  const str = stringToTest.textContent;
+  
+  const matched = str.match(regex);
+
+  if (!matched) {
+    testResult.textContent = "no match";
+    return;
+  }
+
+  stringToTest.innerHTML = str.replace(regex, m => `<span class="highlight">${m}</span>`);
+
+  testResult.textContent = flags.includes('g')
+  ? matched.join(", ")
+  : matched[0];
+})

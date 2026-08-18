@@ -1,0 +1,61 @@
+** start of script.js **
+
+function normalizeUnits(manifest) {
+  const newManifest = { ...manifest };
+  if (manifest.unit === "kg") {
+    return newManifest;
+  }
+  newManifest.unit = "kg";
+  newManifest.weight *= 0.45;
+  return newManifest;
+}
+
+function validateManifest(manifest) {
+  const errorInputs = {};
+  const properties = ["containerId", "destination", "weight", "unit", "hazmat"];
+
+  for (const k of properties) {
+    if (!manifest.hasOwnProperty(k)) {
+      errorInputs[k] = "Missing";
+      continue;
+    }
+    const value = manifest[k];
+    if (k === "containerId" && Number.isInteger(value) && value > 0) {
+      continue;
+    }
+    if (k === "destination" && typeof value === "string" && value.trim().length > 0) {
+      continue;
+    }
+    if (k === "weight" && typeof value === "number" && value > 0) {
+      continue;
+    }
+    if (k === "unit" && (value === "kg" || value === "lb")) {
+      continue;
+    }
+    if (k === "hazmat" && typeof value === "boolean") {
+      continue;
+    }
+
+    errorInputs[k] = "Invalid";
+  }
+
+  return errorInputs;
+}
+
+function processManifest(manifest) {
+  const validated = validateManifest(manifest);
+  
+  if (Object.keys(validated).length !== 0) {
+    console.log(`Validation error: ${manifest.containerId}`);
+    console.log(validated);
+  } else {
+    console.log(`Validation success: ${manifest.containerId}`);
+    console.log(`Total weight: ${normalizeUnits(manifest).weight} kg`);
+  }
+}
+
+processManifest({ containerId: 55, destination: "Carmel", weight: 400, unit: "lb", hazmat: false });
+
+
+** end of script.js **
+

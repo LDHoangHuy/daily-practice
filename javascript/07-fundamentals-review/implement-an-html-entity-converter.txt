@@ -1,0 +1,25 @@
+** start of script.js **
+
+const HTMLcode = {
+  '&': '&amp;',
+  '<': '&lt;',
+  '>': '&gt;',
+  '"': '&quot;',
+  "'": '&apos;'
+};
+
+function convertHTML(str) {
+  const chars = str.split('');
+  for (let i = 0; i < chars.length; i++) {
+    if (HTMLcode.hasOwnProperty(chars[i])) {
+      chars[i] = HTMLcode[chars[i]];
+    }
+  }
+  return chars.join('');
+}
+
+console.log(convertHTML("Dolce & Gabbana"));
+
+
+** end of script.js **
+

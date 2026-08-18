@@ -1,0 +1,19 @@
+** start of script.js **
+
+function pairElement(dna) {
+  const pairs = {
+    'A': 'T',
+    'T': 'A',
+    'C': 'G',
+    'G': 'C'
+  };
+  
+  const result = [];
+  for (const base of dna) {
+    result.push([base, pairs[base]]);
+  }
+  return result;
+}
+
+** end of script.js **
+

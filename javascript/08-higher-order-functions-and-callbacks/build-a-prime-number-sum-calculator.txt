@@ -1,0 +1,31 @@
+** start of script.js **
+
+function isPrime(num) {
+  if (num <= 1) return false;
+  if (num === 2) return true;
+  if (num % 2 === 0) return false;
+
+  for (let i = 3; i <= Math.sqrt(num); i += 2) {
+    if (num % i === 0) {
+      return false;
+    }
+  }
+  return true;
+}
+
+function sumPrimes(num) {
+  if (num < 2) return 0;
+  let sum = 2;
+  for (let i = 3; i <= num; i += 2) {
+    if (isPrime(i)) {
+      sum += i;
+    }
+  }
+  return sum;
+}
+
+console.log(sumPrimes(10));
+
+
+** end of script.js **
+

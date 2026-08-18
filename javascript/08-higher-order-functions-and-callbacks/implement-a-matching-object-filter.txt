@@ -1,0 +1,20 @@
+** start of script.js **
+
+function whatIsInAName(collection, source) {
+  return collection.filter(
+    obj => {
+      for (const key in source) {
+        if (!obj.hasOwnProperty(key) || obj[key] !== source[key]) {
+          return false;
+        }
+      }
+      return true;
+    }
+  );
+}
+
+console.log(whatIsInAName([{"a": 1, "b": 2, "c": 3}], {"a": 1, "b": 9999, "c": 3}));
+
+
+** end of script.js **
+

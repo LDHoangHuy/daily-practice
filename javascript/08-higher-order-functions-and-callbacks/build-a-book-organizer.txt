@@ -1,0 +1,46 @@
+** start of script.js **
+
+const books = [
+  {
+    title: "ABC",
+    authorName: "Lenor",
+    releaseYear: 1999
+  },
+  {
+    title: "Think and Grow Rich",
+    authorName: "Napoleon Hill",
+    releaseYear: 1937
+  },
+  {
+    title: "Family 2",
+    authorName: "Diablo Sucila",
+    releaseYear: 2006
+  },
+  {
+    title: "Family",
+    authorName: "Diablo Sucila",
+    releaseYear: 2003
+  }
+];
+
+function sortByYear(book1, book2) {
+  const rl1 = book1.releaseYear;
+  const rl2 = book2.releaseYear;
+  if (rl1 < rl2) {
+    return -1;
+  } else if (rl1 > rl2) {
+    return 1;
+  } else {
+    return 0;
+  }
+}
+
+const filteredBooks = books.filter(book => book.releaseYear <= 1998);
+
+filteredBooks.sort(sortByYear);
+
+console.log(filteredBooks);
+
+
+** end of script.js **
+

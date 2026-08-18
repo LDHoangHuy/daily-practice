@@ -1,0 +1,18 @@
+const textInput = document.querySelector("#text-input");
+const checkBtn = document.querySelector("#check-btn");
+const resultP = document.querySelector("#result");
+
+checkBtn.addEventListener("click", () => {
+  const inputVal = textInput.value;
+  if (inputVal === "") {
+    alert("Please input a value");
+    return;
+  }
+  const alphaNumRegex = /[a-z0-9]/g;
+  const alphaNumArr = inputVal.toLowerCase().match(alphaNumRegex);
+  const strA = alphaNumArr.join('');
+  const strB = alphaNumArr.reverse().join('');
+  resultP.textContent = strA === strB ? `${inputVal} is a palindrome` : `${inputVal} is not a palindrome`;
+  textInput.value = "";
+  return;
+})

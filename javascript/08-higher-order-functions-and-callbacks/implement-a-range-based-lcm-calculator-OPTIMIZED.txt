@@ -1,0 +1,32 @@
+** start of script.js **
+
+function gcd(a, b) {
+  while (b != 0) {
+    [a, b] = [b, a % b];
+  }
+  return a;
+}
+
+function lcm(a, b) {
+  return (a * b) / gcd(a, b);
+}
+
+function smallestCommons(arr) {
+  /*
+  LCM: boi chung nho nhat
+  GCD: uoc chung lon nhat
+  LCM(a, b) = (a * b) / GCD(a, b)
+  */
+  const [min, max] = arr.sort((a, b) => a - b);
+  let result = min;
+  for (let i = min + 1; i <= max; i++) {
+    result = lcm(result, i);
+  }
+  return result;
+}
+
+console.log(smallestCommons([23, 18]));
+
+
+** end of script.js **
+

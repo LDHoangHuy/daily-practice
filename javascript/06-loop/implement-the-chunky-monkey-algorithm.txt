@@ -1,0 +1,36 @@
+** start of script.js **
+
+function chunkArrayInGroups(arr, len) {
+  /* 
+    [1, 2, 3, 4, 5], 2
+    [[1]]
+    [[1, 2]]
+    [[1, 2], [3]]
+    [[1, 2], [3, 4]]
+    [[1, 2], [3, 4], [5]]
+    loop with a nested loop
+    outer loop keeps track of the outer most array
+    nested loop makes the inner arrays:
+      check if the index % len === len - 1 (last element of an inner array) -> break
+  */
+  const result = [];
+  for (let i = 0; i < arr.length; i++) {
+    const innerArr =  [];
+    while (i < arr.length) {
+      if (i % len === len - 1) {
+        innerArr.push(arr[i]);
+        break;
+      }
+      innerArr.push(arr[i]);
+      i++;
+    }
+    result.push(innerArr);
+  }
+  return result;
+}
+
+console.log(chunkArrayInGroups([0, 1, 2, 3, 4, 5, 6, 7, 8], 4));
+
+
+** end of script.js **
+

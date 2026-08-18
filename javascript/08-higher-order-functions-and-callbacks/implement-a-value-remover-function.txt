@@ -1,0 +1,12 @@
+** start of script.js **
+
+function destroyer(arr, ...valuesToRemoves) {
+  const removeSet = new Set(valuesToRemoves);
+  return arr.filter(el => !removeSet.has(el));
+}
+
+console.log(destroyer([2, 3, 2, 3], 2, 3));
+
+
+** end of script.js **
+

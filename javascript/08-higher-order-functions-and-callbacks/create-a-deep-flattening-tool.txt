@@ -1,0 +1,40 @@
+** start of script.js **
+
+function steamrollArray(arr) {
+  /*
+  [[1], [], [2, [3]]]
+  - check if el is an array by checking its length (>= 0 is an array (can be an empty array); undefined is not an array)
+  - extract array's values ...array?
+  [1] => 1
+  [2, [3]] => 2, [3]
+  [3] => 3
+  
+  result = []
+  [[1], [], [2, [3]]]
+  [1] check arr ? yes => go in
+    1 check arr ? no => push to result - [1]
+  [] check arr ? yes => go in
+    none => pass
+  [2, [3]] check arr ? yes => go in
+    2 check arr ? no => push to result - [1, 2]
+    [3] check arr ? yes => go in
+      3 check arr ? no => push to result - [1, 2, 3]
+  */
+  const result = [];
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i].length === undefined || typeof arr[i] === "string") {
+      result.push(arr[i]);
+    } else if (arr[i].length === 0) {
+      continue;
+    } else {
+      result.push(...steamrollArray(arr[i]));
+    }
+  }
+  return result;
+}
+
+console.log(steamrollArray(["a", 2, [3, [4, 5]], {}]));
+
+
+** end of script.js **
+

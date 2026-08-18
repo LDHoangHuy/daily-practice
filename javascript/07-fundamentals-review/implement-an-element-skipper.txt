@@ -1,0 +1,19 @@
+** start of script.js **
+
+function dropElements(arr, func) {
+  for (let i = 0; i < arr.length; i++) {
+    if (func(arr[i])) {
+      return arr.slice(i);
+    }
+  }
+  return [];
+}
+
+const arr = [1, 2, 3, 4];
+const func = n => n >= 3;
+
+console.log(dropElements(arr, func));
+
+
+** end of script.js **
+

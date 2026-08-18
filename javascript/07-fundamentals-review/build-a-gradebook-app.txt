@@ -1,0 +1,44 @@
+** start of script.js **
+
+function getAverage(testScores) {
+  let sum = 0;
+  for (const score of testScores) {
+    sum += score;
+  }
+  return sum / testScores.length;
+}
+
+function getGrade(score) {
+  /*
+  0: 0 - 59
+  1: 60 - 69
+  2: 70 - 79
+  3: 80 - 89
+  4: 90 - 99
+  5: 100
+  */
+  const grade = ["F", "D", "C", "B", "A", "A+"];
+  const idx = Math.floor(score / 10) - 5;
+  return idx >= 0 ? grade[idx] : grade[0];
+}
+
+function hasPassingGrade(score) {
+  return getGrade(score) !== "F";
+}
+
+function studentMsg(scores, score) {
+  const avg = getAverage(scores);
+  const grade = getGrade(score);
+  const subMsg = hasPassingGrade(score) ? "You passed the course." : "You failed the course.";
+  return `Class average: ${avg}. Your grade: ${grade}. ${subMsg}`;
+}
+
+console.log(getAverage([92, 88, 12, 77, 57, 100, 67, 38, 97, 89]));
+
+console.log(getGrade(90));
+
+console.log(studentMsg([12, 22, 32, 42, 52, 62, 72, 92], 85));
+
+
+** end of script.js **
+

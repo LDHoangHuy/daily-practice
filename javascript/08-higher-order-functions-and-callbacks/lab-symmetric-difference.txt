@@ -1,0 +1,13 @@
+** start of script.js **
+
+function diffArray(arrA, arrB) {
+  const res1 = arrA.filter(el => !arrB.includes(el));
+  const res2 = arrB.filter(el => !arrA.includes(el));
+  return [...res1, ...res2];
+}
+
+console.log(diffArray(["car", "bike", "bus"], ["bike", "train", "plane", "bus"]));
+
+
+** end of script.js **
+

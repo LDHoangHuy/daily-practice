@@ -1,0 +1,19 @@
+** start of script.js **
+
+const HTMLcode = {
+  '&': '&amp;',
+  '<': '&lt;',
+  '>': '&gt;',
+  '"': '&quot;',
+  '\'': '&apos;'
+};
+
+function convertHTML(str) {
+  return str.replace(/[&<>"']/g, match => HTMLcode[match]);
+}
+
+console.log(convertHTML("Dolce & Gabbana"));
+
+
+** end of script.js **
+

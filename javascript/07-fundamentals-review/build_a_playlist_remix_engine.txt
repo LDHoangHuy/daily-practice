@@ -1,0 +1,100 @@
+const playlists = [
+  [
+    {
+      trackId: "trk101",
+      artist: "Velvet Comet",
+      title: "Crimson Afterglow",
+      votes: 5,
+      bpm: 122
+    },
+    {
+      trackId: "trk102",
+      artist: "Neon Harbor",
+      title: "Static Horizon",
+      votes: 2,
+      bpm: 108
+    },
+    {
+      trackId: "trk103",
+      artist: "Lunar Arcade",
+      title: "Midnight Frequency",
+      votes: 4,
+      bpm: 128
+    }
+  ],
+  [
+    {
+      trackId: "trk201",
+      artist: "Solar Echo",
+      title: "Glass Skyline",
+      votes: 3,
+      bpm: 115
+    },
+    {
+      trackId: "trk202",
+      artist: "Velvet Comet",
+      title: "Satellite Hearts",
+      votes: 6,
+      bpm: 124
+    }
+  ]
+];
+
+function flattenPlaylists(playlists) {
+  if (!Array.isArray(playlists)) {
+    return [];
+  }
+  const outputPlaylist = [...playlists];
+  for (let i = 0; i < outputPlaylist.length; i++) {
+    outputPlaylist[i].map((track, trackIndex) => {
+      track.source = [i, trackIndex];
+    });
+  }
+  return outputPlaylist.flat();
+}
+
+function scoreTracks(tracks) {
+  tracks.map(track => {
+    track.score = track.votes * 10 - Math.abs(track.bpm - 120);
+  })
+  return tracks;
+}
+
+function dedupeTracks(tracks) {
+  const output = [];
+  const existed = [];
+  for (const track of tracks) {
+    if (existed.includes(track.trackId)) {
+      continue;
+    }
+    existed.push(track.trackId);
+    output.push(track);
+  }
+  return output;
+}
+
+function enforceArtistQuota(tracks, limit) {
+  const occurences = {};
+  const output = [];
+  tracks.forEach(track => occurences[track.artist] = 0);
+  for (const track of tracks) {
+    if (occurences[track.artist] === limit) {
+      continue;
+    }
+    occurences[track.artist]++;
+    output.push(track);
+  }
+  return output;
+}
+
+function buildSchedule(tracks) {
+  return tracks.map((track, index) => { 
+    return { slot: index+1, trackId: track.trackId };
+  })
+}
+
+function remixPlaylist(playlists, limOfArtistOccurences) {
+  return buildSchedule(enforceArtistQuota(dedupeTracks(scoreTracks(flattenPlaylists(playlists))), limOfArtistOccurences));
+}
+
+console.log(remixPlaylist(playlists, 1));

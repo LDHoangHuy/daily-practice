@@ -1,0 +1,63 @@
+** start of script.js **
+
+const questions = [
+  {
+    category: "geography",
+    question: "Which of the following is an ASEAN country?",
+    choices: ["Mongolia", "Bangladesh", "Singapore"],
+    answer: "Singapore"
+  },
+  {
+    category: "history",
+    question: "Which of the following countries that attacked the US on Pearl Harbor?",
+    choices: ["Japanese Empire", "Soviet Russia", "Germany"],
+    answer: "Japanese Empire"
+  },
+  {
+    category: "japanese",
+    question: "Which of the following words that means 'my son' in Japanese?",
+    choices: ["otouto", "musume", "musuko"],
+    answer: "musuko"
+  },
+  {
+    category: "geography",
+    question: "Which of the following cities that is in the US?",
+    choices: ["Baghdad", "Seattle", "Taipei"],
+    answer: "Seattle"
+  },
+  {
+    category: "aircrafts",
+    question: "Which of the following brands that produces commercial aircrafts?",
+    choices: ["Toyota", "Audi", "Boeing"],
+    answer: "Boeing"
+  }
+];
+
+function getRandomQuestion(questions) {
+  return questions[Math.floor(Math.random() * 5)];
+}
+
+function getRandomComputerChoice(choices) {
+  return choices[Math.floor(Math.random() * 3)];
+}
+
+function getResults(question, choice) {
+  if (question.answer === choice) {
+    return "The computer's choice is correct!";
+  }
+  return `The computer's choice is wrong. The correct answer is: ${question.answer}`;
+}
+
+const question = getRandomQuestion(questions);
+
+const choice = getRandomComputerChoice(question.choices);
+
+console.log(question.question);
+
+console.log(choice);
+
+console.log(getResults(question, choice));
+
+
+** end of script.js **
+

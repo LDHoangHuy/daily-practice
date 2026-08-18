@@ -1,0 +1,24 @@
+** start of script.js **
+
+function pyramid(char, rows, isDownwards) {
+  //spaces:
+  //d: row
+  //u: rows - row - 1
+  //chars:
+  //d: 2 * (rows - row) - 1
+  //u: 2 * row + 1
+  let result = '\n';
+  for (let row = 0; row < rows; row++) {
+    const currentRow = isDownwards ? row : rows - row - 1;
+    const spaces = ' '.repeat(currentRow);
+    const chars = char.repeat(2 * (rows - currentRow) - 1);
+    result += spaces + chars + '\n';
+  }
+  return result;
+}
+
+console.log(pyramid("o", 4, false));
+
+
+** end of script.js **
+

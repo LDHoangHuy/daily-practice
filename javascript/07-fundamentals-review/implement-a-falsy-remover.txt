@@ -1,0 +1,17 @@
+** start of script.js **
+
+function bouncer(arr) {
+  const result = [];
+  for (const el of arr) {
+    if (el) {
+      result.push(el);
+    }
+  }
+  return result;
+}
+
+console.log(bouncer([null, NaN, 1, 2, undefined]));
+
+
+** end of script.js **
+

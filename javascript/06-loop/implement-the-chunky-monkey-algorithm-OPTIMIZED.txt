@@ -1,0 +1,15 @@
+** start of script.js **
+
+function chunkArrayInGroups(arr, len) {
+  const result = [];
+  for (let i = 0; i < arr.length; i+=len) {
+    result.push(arr.slice(i, i + len));
+  }
+  return result;
+}
+
+console.log(chunkArrayInGroups([0, 1, 2, 3, 4, 5, 6], 3));
+
+
+** end of script.js **
+

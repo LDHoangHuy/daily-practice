@@ -1,0 +1,19 @@
+** start of script.js **
+
+function uniteUnique(...args) {
+  const result = [];
+  for (const arg of args) {
+    for (const num of arg) {
+      if (!result.includes(num)) {
+        result.push(num);
+      }
+    }
+  }
+  return result;
+}
+
+console.log(uniteUnique([1, 3, 2, 3], [5, 2, 1, 4], [2, 1]));
+
+
+** end of script.js **
+

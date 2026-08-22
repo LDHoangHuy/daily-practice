@@ -1,18 +1,13 @@
 function isPalindrome(word) {
-  const lowerCasedWord = word.toLowerCase();
-  return lowerCasedWord === lowerCasedWord.split("").reverse().join("");
+  const lower = word.toLowerCase();
+  return lower === [...lower].reverse().join("");
 }
 
 function findPalindromeBreaks(words) {
-  const result = [];
-
-  for (let i = 0; i < words.length; i++) {
-    if (!isPalindrome(words[i])) {
-      result.push(i);
-    }
-  }
-
-  return result;
+  return words.reduce((acc, word, idx) => {
+    if (!isPalindrome(word)) acc.push(idx);
+    return acc;
+  }, []);
 }
 
 function findRepeatedPhrases(words, phraseLength) {
@@ -26,11 +21,8 @@ function findRepeatedPhrases(words, phraseLength) {
   for (let i = 0; i + phraseLength <= words.length; i++) {
     const phrase = words.slice(i, i + phraseLength).join(" ");
 
-    if (phraseIndices[phrase]) {
-      phraseIndices[phrase].push(i);
-    } else {
-      phraseIndices[phrase] = [i];
-    }
+    phraseIndices[phrase] = phraseIndices[phrase] ?? [];
+    phraseIndices[phrase].push(i);
   }
 
   for (const phrase in phraseIndices) {

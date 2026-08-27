@@ -2,27 +2,27 @@ const textArea = document.querySelector("#markdown-input");
 const rawHTML = document.querySelector("#html-output");
 const preview = document.querySelector("#preview");
 
-//const quoteReg = /^\s*>\s(.+)($|\n.*)/g;
-//^(?<before>.*) ... (?<after>.*)$
-const hReg = /^\s*(?<mark>#{1,3})\s(?<text>.+)/gm;
-const strEmReg = /(?<mark>\*{1,2}|_{1,2})(?<text>.*)\k<mark>/g;
-const imgReg = /!\[(?<altText>.*)\]\((?<imgSrc>.*)\)/g;
-const linkReg = /\[(?<linkText>.*)\]\((?<url>.*)\)/g;
+function convertMarkdown() {
+  const hReg = /^\s*(?<mark>#{1,3})\s(?<text>.+)/gm;
+  const strReg = /(?<mark>\*{2}|_{2})(?<text>.*)\k<mark>/g;
+  const emReg = /(?<mark>\*|_)(?<text>.*)\k<mark>/g;
+  const imgReg = /!\[(?<altText>.*)\]\((?<imgSrc>.*)\)/g;
+  const linkReg = /\[(?<linkText>.*)\]\((?<url>.*)\)/g;
+  const quoteReg = /^\s*>\s(?<text>.+)($|\n)/gm;
 
-//`<p>${groups.before}<strong>${groups.text}</strong>${groups.after}</p>`
-//`<p>${groups.before}<em>${groups.text}</em>${groups.after}</p>`
-
-textArea.addEventListener("input", () => {
   let htmlText = textArea.value
     .replace(hReg, (...args) => {
       const groups = args.pop();
       const el = `h${groups.mark.length}`;
       return `<${el}>${groups.text}</${el}>`;
     })
-    .replace(strEmReg, (...args) => {
+    .replace(strReg, (...args) => {
       const groups = args.pop();
-      const el = groups.mark.length === 1 ? "em" : "strong";
-      return `<${el}>${groups.text}</${el}>`;
+      return `<strong>${groups.text}</strong>`;
+    })
+    .replace(emReg, (...args) => {
+      const groups = args.pop();
+      return `<em>${groups.text}</em>`;
     })
     .replace(imgReg, (...args) => {
       const groups = args.pop();
@@ -35,8 +35,15 @@ textArea.addEventListener("input", () => {
       const linkText = groups.linkText;
       const url = groups.url.trim();
       return `<a href="${url}">${linkText}</a>`
+    })
+    .replace(quoteReg, (...args) => {
+      const groups = args.pop();
+      return `<blockquote>${groups.text}</blockquote>`;
     });
-  
-  rawHTML.innerText = htmlText;
-  preview.innerHTML = htmlText;
+  return htmlText;
+}
+
+textArea.addEventListener("input", () => {
+  rawHTML.innerText = convertMarkdown();
+  preview.innerHTML = convertMarkdown();
 });

@@ -3,25 +3,21 @@
  * @return {string}
  */
 var longestCommonPrefix = function(strs) {
-    let resultPrefix = strs[0];
-    let endIdx = strs[0].length - 1;
-    for (let i = 1; i < strs.length; i++) {
-        let temp = -1;
-        for (let j = 0; j < strs[i].length && j < resultPrefix.length; j++) {
-            if (strs[i][j] === resultPrefix[j]) {
-                temp = j;
-            } else {
-                break;
-            }
-        }
-        if (temp < endIdx) {
-            endIdx = temp;
-        }
-        if (endIdx === -1) {
+    const processedStrs = strs.toSorted();
+    const result = [""];
+    const [firstStr, lastStr] = [processedStrs[0], processedStrs[processedStrs.length - 1]];
+    const maxLen = firstStr.length <= lastStr.length ? firstStr.length : lastStr.length;
+    
+    let i = 0;
+    while (i < maxLen) {
+        if (firstStr[i] === lastStr[i]) {
+            result.push(firstStr[i]);
+            i++;
+        } else {
             break;
         }
     }
-    return resultPrefix.slice(0, endIdx + 1);
+    return result.join("");
 };
-// 4ms (25.18%)
-// 56.13MB (19.38%)
+// 0ms (100%)
+// 53.42MB (86.36%)
